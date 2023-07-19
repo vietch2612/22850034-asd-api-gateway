@@ -1,27 +1,14 @@
+require('dotenv').config();
+
 const ROUTES = [
     {
-        url: '/free',
+        url: '/user/*',
         auth: false,
-        rateLimit: {
-            windowMs: 15 * 60 * 1000,
-            max: 5
-        },
         proxy: {
-            target: "https://www.google.com",
+            target: process.env.MS_AUTH_URL,
             changeOrigin: true,
             pathRewrite: {
-                [`^/free`]: '',
-            },
-        }
-    },
-    {
-        url: '/premium',
-        auth: true,
-        proxy: {
-            target: "https://google.com",
-            changeOrigin: true,
-            pathRewrite: {
-                [`^/premium`]: '',
+                [`/user/*`]: '/',
             },
         }
     }

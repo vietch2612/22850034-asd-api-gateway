@@ -12,7 +12,7 @@ const setupAuth = (app, routes) => {
 
             console.log(token)
 
-            const response = await axios.post(process.env.AUTH_SERVICE_URL, null, {
+            const response = await axios.post(process.env.MS_AUTH_URL + '/authentication', null, {
                 headers: {
                     'Authorization': `${token}`,
                 },
