@@ -1,17 +1,23 @@
 require('dotenv').config();
 
 const ROUTES = [
-    {
-        url: '/user/*',
-        auth: false,
-        proxy: {
-            target: process.env.MS_AUTH_URL,
-            changeOrigin: true,
-            pathRewrite: {
-                [`/user/*`]: '/',
-            },
-        }
-    }
-]
+	{
+		url: '/login',
+		auth: false,
+		proxy: {
+			target: process.env.MS_AUTH_HOST,
+			changeOrigin: true,
+		},
+
+	},
+	{
+		url: '/api/*',
+		auth: true,
+		proxy: {
+			target: process.env.MS_BACKEND_HOST,
+			changeOrigin: true,
+		},
+	},
+];
 
 exports.ROUTES = ROUTES;

@@ -4,7 +4,8 @@ const axios = require('axios');
 const setupAuth = (app, routes) => {
     const verifyToken = async (req, res, next) => {
         try {
-            const token = req.headers['authorization']; // Lấy token từ session (có thể thay đổi tùy vào cách lưu trữ token)
+            console.log(req.headers);
+            const token = req.headers['authorization'];
 
             if (!token) {
                 return res.status(401).json({ message: 'Unauthorized' });
@@ -12,7 +13,7 @@ const setupAuth = (app, routes) => {
 
             console.log(token)
 
-            const response = await axios.post(process.env.MS_AUTH_URL + '/authentication', null, {
+            const response = await axios.post(process.env.MS_AUTH_HOST + '/authentication', null, {
                 headers: {
                     'Authorization': `${token}`,
                 },
